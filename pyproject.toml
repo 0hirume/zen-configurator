@@ -1,0 +1,16 @@
+[project]
+name = "zen-configurator"
+version = "0.1.0"
+requires-python = ">=3.14"
+dependencies = [
+  "lz4>=4.4.5",
+  "mozprofile>=3.0.0",
+  "tomli-w>=1.2.0",
+]
+
+[project.scripts]
+zen-configurator = "zen_configurator:main"
+
+[build-system]
+requires = ["uv_build>=0.12.13,<0.13.0"]
+build-backend = "uv_build"

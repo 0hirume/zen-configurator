@@ -1,0 +1,117 @@
+[base.preferences]
+"browser.contentblocking.category" = "standard"
+"browser.launcherProcess.enabled" = true
+"browser.preferences.experimental.hidden" = true
+"browser.theme.toolbar-theme" = 0
+"dom.forms.autocomplete.formautofill" = true
+"extensions.activeThemeID" = "default-theme@mozilla.org"
+"extensions.formautofill.creditCards.enabled" = false
+"extensions.pictureinpicture.enable_picture_in_picture_overrides" = true
+"findbar.highlightAll" = true
+"network.dns.disablePrefetch" = true
+"network.http.speculative-parallel-limit" = 0
+"privacy.clearOnShutdown_v2.formdata" = true
+"privacy.clearSiteData.browsingHistoryAndDownloads" = true
+"privacy.clearSiteData.formdata" = true
+"privacy.clearSiteData.siteSettings" = true
+"privacy.sanitize.timeSpan" = 0
+"privacy.userContext.enabled" = false
+"security.webauthn.show_ms_settings_link" = true
+"services.sync.declinedEngines" = ""
+"sidebar.visibility" = "hide-on-close"
+"zen.tabs.show-newtab-vertical" = false
+"zen.view.compact.enable-at-startup" = false
+"zen.view.show-newtab-button-top" = false
+"zen.view.use-single-toolbar" = false
+"zen.workspaces.continue-where-left-off" = true
+"zen.workspaces.hide-default-container-indicator" = false
+
+[[base.addons]]
+id = "uBlock0@raymondhill.net"
+install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+
+[base.toolbar]
+current_version = 26
+
+[base.toolbar.placements]
+PersonalToolbar = ["import-button", "personal-bookmarks"]
+TabsToolbar = ["tabbrowser-tabs"]
+nav-bar = [
+  "back-button",
+  "forward-button",
+  "stop-reload-button",
+  "vertical-spacer",
+  "urlbar-container",
+  "unified-extensions-button",
+  "ublock0_raymondhill_net-browser-action",
+]
+toolbar-menubar = ["menubar-items"]
+unified-extensions-area = ["_a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7_-browser-action"]
+vertical-tabs = []
+widget-overflow-fixed-list = []
+zen-sidebar-foot-buttons = ["downloads-button", "zen-workspaces-button", "zen-create-new-button"]
+zen-sidebar-top-buttons = []
+
+[profiles.main.theme]
+type = "gradient"
+opacity = 0.9
+texture = 0
+colors = ["#000000"]
+
+[[profiles.main.theme.gradient_colors]]
+c = [0, 0, 0]
+isCustom = false
+algorithm = "floating"
+isPrimary = true
+lightness = 0
+type = "explicit-black-white"
+
+[profiles.main.theme.gradient_colors.position]
+x = 180
+y = 180
+
+[[profiles.other.addons]]
+id = "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}"
+install_url = "https://addons.mozilla.org/firefox/downloads/latest/user-agent-string-switcher/latest.xpi"
+
+[profiles.pink.theme]
+type = "gradient"
+opacity = 0.9
+texture = 0
+colors = ["#e3b5ba", "#e3d7b5", "#e3b5e0"]
+
+[[profiles.pink.theme.gradient_colors]]
+c = [227, 181, 186]
+isCustom = false
+algorithm = "analogous"
+isPrimary = true
+lightness = "80"
+type = "explicit-lightness"
+
+[profiles.pink.theme.gradient_colors.position]
+x = 285
+y = 168
+
+[[profiles.pink.theme.gradient_colors]]
+c = [227, 215, 181]
+isCustom = false
+algorithm = "analogous"
+isPrimary = false
+lightness = "80"
+type = "explicit-lightness"
+
+[profiles.pink.theme.gradient_colors.position]
+x = 256
+y = 253
+
+[[profiles.pink.theme.gradient_colors]]
+c = [227, 181, 224]
+isCustom = false
+algorithm = "analogous"
+isPrimary = false
+lightness = "80"
+type = "explicit-lightness"
+
+[profiles.pink.theme.gradient_colors.position]
+x = 239
+y = 91

@@ -1,0 +1,6 @@
+[tools]
+"aqua:astral-sh/ruff" = "latest"
+"aqua:astral-sh/ty" = "latest"
+"aqua:tombi-toml/tombi" = "latest"
+"github:0hirume/breathers" = "latest"
+"npm:oxfmt" = "latest"

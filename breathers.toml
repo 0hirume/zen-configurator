@@ -1,0 +1,6 @@
+#:schema https://raw.githubusercontent.com/0hirume/breathers/main/schema.json
+
+exclude = [".venv", "generated"]
+
+[python]
+dictionary_entries = false

@@ -701,6 +701,27 @@ def atomic_write(path: Path, data: bytes) -> None:
     os.replace(temporary_path, path)
 
 
+def resolve_owner(owner: str) -> tuple[int, int]:
+    if getattr(os, "chown", None) is None:
+        raise RuntimeError("--owner requires a POSIX platform")
+
+    get_password_entry = __import__("pwd").getpwnam  # ty: ignore[unresolved-attribute]
+    account = get_password_entry(owner)
+
+    return account.pw_uid, account.pw_gid
+
+
+def restore_owner(path: Path, owner: tuple[int, int]) -> None:
+    user_id, group_id = owner
+    change_owner = getattr(os, "chown", None)
+
+    if change_owner is None:
+        raise RuntimeError("--owner requires a POSIX platform")
+
+    for current_path in (path, *path.rglob("*")):
+        change_owner(current_path, user_id, group_id, follow_symlinks=False)
+
+
 def parse_profile_mappings(values: list[str]) -> dict[str, str]:
     mappings: dict[str, str] = {}
 
@@ -724,10 +745,12 @@ def apply_command(
     zen_directory: Path,
     zen_installation: Path | None,
     output: Path,
+    owner: str | None,
 ) -> None:
     configuration = load_configuration(configuration_file)
     profiles = discover_profiles(zen_directory)
     zen_installation = zen_installation or default_zen_installation()
+    owner_ids = resolve_owner(owner) if owner is not None else None
 
     if zen_installation is None:
         raise ValueError("Could not find the Zen installation; pass --zen-installation")
@@ -793,6 +816,9 @@ def apply_command(
             profile_path,
             merge_profile(configuration, logical_name)["profile_addons"],
         )
+
+        if owner_ids is not None:
+            restore_owner(profile_path, owner_ids)
 
         print(f"Applied {logical_name} to {profile_path}")
 
@@ -892,6 +918,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
 
     apply_parser.add_argument("-i", "--zen-installation", type=Path)
+    apply_parser.add_argument("-u", "--owner")
     apply_parser.add_argument("-o", "--output", type=Path, default=Path("generated"))
 
     return parser
@@ -927,6 +954,7 @@ def main() -> None:
                 arguments.zen_directory,
                 arguments.zen_installation,
                 arguments.output,
+                arguments.owner,
             )
     except (KeyError, OSError, RuntimeError, ValueError) as error:
         parser.exit(1, f"error: {error}" + chr(10))

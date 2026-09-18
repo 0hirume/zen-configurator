@@ -142,7 +142,10 @@ def zen_directory_candidates(
     if platform_name == "darwin":
         return (home / "Library" / "Application Support" / "zen",)
 
+    xdg_config_home = Path(os.environ.get("XDG_CONFIG_HOME") or home / ".config")
+
     return (
+        xdg_config_home / "zen",
         home / ".zen",
         home / ".var" / "app" / "app.zen_browser.zen" / ".zen",
     )
